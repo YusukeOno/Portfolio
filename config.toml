@@ -1,4 +1,18 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "y-ono's Site"
 theme = "vncnt-hugo"
+
+[params]
+  author = "Yusuke Ono"
+  description = "Landing Page"
+  bio = "Belong to NSWT."
+  avatar = "img/avatar.jpg"
+  favicon = "img/favicon.ico"
+
+  [params.contact]
+    email = "y-ono@nswt.co.jp"
+    github = "YusukeONo"
+#    instagram = "jdoe"
+#    twitter = "jdoe"
+    ello = ""
