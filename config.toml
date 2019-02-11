@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "http://y-ono.work/"
 languageCode = "en-us"
 title = "y-ono's Site"
 theme = "vncnt-hugo"
@@ -7,7 +7,7 @@ theme = "vncnt-hugo"
   author = "Yusuke Ono"
   description = "Landing Page"
   bio = "Belong to NSWT."
-  avatar = "img/avatar.jpg"
+  avatar = "/project-management-professional-pmp.png"
   favicon = "img/favicon.ico"
 
   [params.contact]
