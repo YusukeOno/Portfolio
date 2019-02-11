@@ -13,7 +13,7 @@ theme = "vncnt-hugo"
 
   [params.contact]
     email = "y-ono@nswt.co.jp"
-    github = "YusukeONo"
+    github = "YusukeOno"
 #    instagram = "jdoe"
 #    twitter = "jdoe"
     ello = ""
