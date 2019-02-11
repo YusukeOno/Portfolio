@@ -1,5 +1,6 @@
 baseURL = "http://y-ono.work/"
-languageCode = "en-us"
+languageCode = "ja-jp"
+language = "jp"
 title = "y-ono's Site"
 theme = "vncnt-hugo"
 
@@ -8,7 +9,7 @@ theme = "vncnt-hugo"
   description = "Landing Page"
   bio = "Belong to NSWT."
   avatar = "/project-management-professional-pmp.png"
-  favicon = "img/favicon.ico"
+  favicon = "favicon.ico"
 
   [params.contact]
     email = "y-ono@nswt.co.jp"
