@@ -1,15 +1,14 @@
 baseURL = "http://y-ono.work/"
-languageCode = "ja-jp"
-language = "jp"
-title = "y-ono's Site"
+title = "Yusuke Ono"
 theme = "vncnt-hugo"
 
 [params]
   author = "Yusuke Ono"
-  description = "Landing Page"
-  bio = "Belong to NSWT."
+  description = "Yusuke Ono"
+  bio = "Belong to the NSWT."
   avatar = "/project-management-professional-pmp.png"
   favicon = "favicon.ico"
+
 
   [params.contact]
     email = "y-ono@nswt.co.jp"
