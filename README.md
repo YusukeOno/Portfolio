@@ -24,3 +24,6 @@ GAEに反映するコマンド。
 - [ ] Githubのmasterブランチにpushしたら、CI側でhugoしてGAEにdeployする。
 - [ ] 結果をslackに通知する。
 
+### GTM導入
+
+- [x] Google Tag Managerを導入する。
