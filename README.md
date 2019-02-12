@@ -16,3 +16,11 @@ Portfolioサイト。
 GAEに反映するコマンド。
 
 `$ gcloud app deploy app.yaml`
+
+## TODO
+
+### CI導入
+
+- [ ] Githubのmasterブランチにpushしたら、CI側でhugoしてGAEにdeployする。
+- [ ] 結果をslackに通知する。
+
