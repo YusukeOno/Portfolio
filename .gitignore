@@ -11,3 +11,8 @@ $RECYCLE.BIN/
 # OSX
 .DS_Store
 
+/content/*
+!.gitkeep
+
+/data/*
+!.gitkeep
