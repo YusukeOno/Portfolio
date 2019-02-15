@@ -22,7 +22,8 @@ GAEに反映するコマンド。
 ### CI導入
 
 - [x] Githubのmasterブランチにpushしたら、CircleCI側でhugoして静的コンテンツをビルドしてGAEにdeployする。
-- [ ] 結果をslackに通知する。
+- [x] 結果をslackに通知する。
+- [ ] カナリアリリースする。
 
 ### GTM導入
 
