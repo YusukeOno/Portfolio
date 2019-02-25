@@ -1,6 +1,8 @@
 # Portfolio
 Portfolioサイト。
 
+Masterブランチにpushすることで、CircleCIにてHugoでビルドされて静的ファイルが生成します。さらに、それらのファイルをGoogle App Engine(GAE)にデプロイします。
+
 ## Hugo
 
 プレビューする。
