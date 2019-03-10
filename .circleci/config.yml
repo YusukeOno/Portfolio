@@ -18,6 +18,17 @@ commands:
         - run:
             name: Exec Hugo
             command: ./hugo
+  gcp_deploy:
+    steps:
+        - run:
+            name: Decode Google Cloud Credentials
+            command: echo ${GOOGLE_AUTH} | base64 -d -i > ${HOME}/gcp-key.json
+        - run:
+            name: exec gcloud setting 
+            command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json && gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+        - run:
+            name: deploy to GAE
+            command: gcloud -q app deploy app.yaml
 jobs:
   build:
     executor: default
@@ -33,15 +44,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Decode Google Cloud Credentials
-          command: echo ${GOOGLE_AUTH} | base64 -d -i > ${HOME}/gcp-key.json
-      - run:
-          name: exec gcloud setting 
-          command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json && gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-      - run:
-          name: deploy to GAE
-          command: gcloud -q app deploy app.yaml
+      - gcp_deploy
 workflows:
   build_and_deploy:
     jobs:
