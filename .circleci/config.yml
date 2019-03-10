@@ -39,7 +39,7 @@ jobs:
 workflows:
   test:
     jobs:
-      - build:
+      - build
       - deploy:
-        require: build
-        
+          requires:
+            - build
