@@ -30,6 +30,8 @@ jobs:
     steps:
         - checkout
         - bundle_install
-        - deploy:
-            name: deploy to GAE
-            command: gcloud -q app deploy app.yaml
+  deploy:
+    executor: default
+    setps:
+      name: deploy to GAE
+      command: gcloud -q app deploy app.yaml
