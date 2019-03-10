@@ -1,26 +1,35 @@
 version: 2.1
+executors:
+  default:
+    docker:
+     - image: google/cloud-sdk
+commands:
+  bundle_install:
+    steps:
+        - run:
+            name: Install Wget
+            command: apt -y install wget
+        - run:
+            name: Git submodule upd
+            command: git submodule update --init 
+        - run:
+            name: Install Hugo
+            command: wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && tar xzf ./hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && rm ./hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
+        - run:
+            name: Decode Google Cloud Credentials
+            command: echo ${GOOGLE_AUTH} | base64 -d -i > ${HOME}/gcp-key.json
+        - run:
+            name: Exec Hugo
+            command: ./hugo
+        - run:
+            name: exec gcloud setting 
+            command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json && gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 jobs:
   build:
-    docker:
-      - image: google/cloud-sdk
+    executor: default
     steps:
-      - checkout
-      - run:
-          name: Install Wget
-          command: apt -y install wget
-      - run: git submodule update --init 
-      - run:
-          name: Install Hugo
-          command: wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && tar xzf ./hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && rm ./hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
-      - run:
-          name: Decode Google Cloud Credentials
-          command: echo ${GOOGLE_AUTH} | base64 -d -i > ${HOME}/gcp-key.json
-      - run:
-          name: Exec Hugo
-          command: ./hugo
-      - run:
-          name: exec gcloud setting 
-          command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json && gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-      - run:
-          name: deploy to GAE
-          command: gcloud -q app deploy app.yaml
+        - checkout
+        - run: bundle_install
+        - deploy:
+            name: deploy to GAE
+            command: gcloud -q app deploy app.yaml
