@@ -24,9 +24,15 @@ jobs:
     steps:
         - checkout
         - bundle_install
+        - persist_to_workspace:
+            root: .
+            paths:
+                - .
   deploy:
     executor: default
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: Decode Google Cloud Credentials
           command: echo ${GOOGLE_AUTH} | base64 -d -i > ${HOME}/gcp-key.json
@@ -37,7 +43,7 @@ jobs:
           name: deploy to GAE
           command: gcloud -q app deploy app.yaml
 workflows:
-  test:
+  build_and_deploy:
     jobs:
       - build
       - deploy:
