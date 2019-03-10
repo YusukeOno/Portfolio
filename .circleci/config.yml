@@ -29,7 +29,7 @@ jobs:
     executor: default
     steps:
         - checkout
-        - run: bundle_install
+        - bundle_install
         - deploy:
             name: deploy to GAE
             command: gcloud -q app deploy app.yaml
