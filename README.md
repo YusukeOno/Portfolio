@@ -1,7 +1,13 @@
 # Portfolio
-Portfolioサイト。
+
+## Overview
 
 Masterブランチにpushすることで、CircleCIにてHugoでビルドされて静的ファイルが生成します。さらに、それらのファイルをGoogle App Engine(GAE)にデプロイします。
+
+## Screen Shot
+
+![PC](https://raw.githubusercontent.com/YusukeOno/Portfolio/f2c46ca6b4918d114619d3f2a04beb4e53ab80b7/pc_imge.png "PCサイト")
+![SP](https://raw.githubusercontent.com/YusukeOno/Portfolio/f2c46ca6b4918d114619d3f2a04beb4e53ab80b7/sp_image.png "SPサイト")
 
 ## CircleCI
 
