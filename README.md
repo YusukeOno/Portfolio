@@ -6,8 +6,8 @@ Masterブランチにpushすることで、CircleCIにてHugoでビルドされ�
 
 ## Screen Shot
 
-![PC](https://raw.githubusercontent.com/YusukeOno/Portfolio/f2c46ca6b4918d114619d3f2a04beb4e53ab80b7/pc_imge.png "PCサイト")
-![SP](https://raw.githubusercontent.com/YusukeOno/Portfolio/f2c46ca6b4918d114619d3f2a04beb4e53ab80b7/sp_image.png "SPサイト")
+![PC](https://raw.githubusercontent.com/YusukeOno/Portfolio/images-1/pc_image.png "PCサイト")
+![SP](https://raw.githubusercontent.com/YusukeOno/Portfolio/images-1/sp_image.png "SPサイト")
 
 ## CircleCI
 
