@@ -35,6 +35,11 @@ CLIで .circleci/config.yml の構文チェックができます。
 
 `$ hugo server`
 
+submoduleのcloneし忘れた事に気がついた場合
+
+`$ git submodule init`  
+`$ git submodule update`
+
 静的ファイルをbuildする。
 
 `$ hugo`
