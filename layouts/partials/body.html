@@ -48,6 +48,9 @@
             {{ with .Site.Params.contact.riss }}<a class="icon" href="https://riss.ipa.go.jp/r?r={{ . }}" target="_blank">
               <i class="fas fa-shield-alt" aria-hidden="true"></i>
             </a>{{ end }}
+            {{ with .Site.Params.contact.blog }}<a class="icon" href="https://{{ . }}" target="_blank">
+              <i class="fab fa-blogger" aria-hidden="true"></i>
+            </a>{{ end }}
           </h3>
           </div>
         </section>
