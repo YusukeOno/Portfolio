@@ -35,21 +35,23 @@
                 document.write('<a class="icon" href=JavaScript:mail_to("","")><i class="fas fa-envelope" aria-hidden="true"></i><\/a>');
               </script>
 
-              {{ with .Site.Params.contact.github }}<a class="icon" href="https://github.com/{{ . }}" target="_blank">
+              {{ with .Site.Params.contact.github }}<a class="icon" href="https://github.com/{{ . }}" target="_blank"
+                rel="noopener">
                 <i class="fab fa-github" aria-hidden="true"></i>
               </a>{{ end }}
-              {{ with .Site.Params.contact.twitter }}<a class="icon" href="https://twitter.com/{{ . }}" target="_blank">
+              {{ with .Site.Params.contact.twitter }}<a class="icon" href="https://twitter.com/{{ . }}" target="_blank"
+                rel="noopener">
                 <i class="fab fa-twitter" aria-hidden="true"></i>
               </a>{{ end }}
               {{ with .Site.Params.contact.instagram }}<a class="icon" href="https://instagram.com/{{ . }}"
-                target="_blank">
+                target="_blank" rel="noopener">
                 <i class="fab fa-instagram" aria-hidden="true"></i>
               </a>{{ end }}
               {{ with .Site.Params.contact.riss }}<a class="icon" href="https://riss.ipa.go.jp/r?r={{ . }}"
-                target="_blank">
+                target="_blank" rel="noopener">
                 <i class="fas fa-shield-alt" aria-hidden="true"></i>
               </a>{{ end }}
-              {{ with .Site.Params.contact.blog }}<a class="icon" href="https://{{ . }}" target="_blank">
+              {{ with .Site.Params.contact.blog }}<a class="icon" href="https://{{ . }}" target="_blank" rel="noopener">
                 <i class="fab fa-blogger" aria-hidden="true"></i>
               </a>{{ end }}
             </h3>
