@@ -5,7 +5,7 @@ theme = "vncnt-hugo"
 [params]
   author = "Yusuke Ono"
   description = "Yusuke Ono"
-  bio = "Belong to the SSAP12. <br> PMP® #1722009 <br> CompTIA Project+ 1020289380<br> PMS 認13-1-PMS4415号 <br> RISS (Registered No.002407)"
+  bio = "Belong to the SSAP12. PMP® #1722009, CompTIA Project+ 1020289380, PMS 認13-1-PMS4415号, RISS (Registered No.002407)"
   avatar = "/project-management-professional-pmp.png"
   favicon = "favicon.ico"
 
