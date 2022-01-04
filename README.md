@@ -15,7 +15,7 @@ Masterブランチにpushすることで、CircleCIにてHugoでビルドされ�
 
 #### Note to self:
 
-CLIで .circleci/config.yml の構文チェックができます。
+CLIで .circleci/config.ymlの構文チェックができます。
 
 `$ brew install circleci`
 
@@ -56,11 +56,10 @@ GAEに反映するコマンド。
 
 ## TODO
 
-### CI導入
+### CI/CD導入
 
-- [x] Githubのmasterブランチにpushしたら、CircleCI側でhugoして静的コンテンツをビルドしてGAEにdeployする。
-- [x] 結果をslackに通知する。
-- [ ] カナリアリリースする。
+- [x] GitHubのmasterブランチにpushしたら、CircleCI側でhugoして静的コンテンツをビルドしてGAEにdeployする。
+- [x] GitHubへのpush結果をslackに通知する。
 
 ### GTM導入
 
