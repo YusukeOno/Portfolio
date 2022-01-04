@@ -31,6 +31,10 @@ CLIで .circleci/config.yml の構文チェックができます。
 
 ## Hugo
 
+インストールする。
+
+`$ brew install hugo`
+
 プレビューする。
 
 `$ hugo server`
