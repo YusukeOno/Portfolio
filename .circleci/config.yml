@@ -1,50 +1,92 @@
 version: 2.1
+
+parameters:
+  hugo-version:
+    type: string
+    default: "0.167.0"
+
 executors:
-  default:
+  build:
     docker:
-      - image: google/cloud-sdk
+      - image: cimg/base:2026.10
+  deploy:
+    docker:
+      - image: cimg/gcp:2026.10
+    environment:
+      CLOUDSDK_CORE_DISABLE_PROMPTS: "1"
+
 commands:
-  bundle_install:
+  build_site:
     steps:
+      - checkout:
+          method: full
       - run:
-          name: Install Wget
-          command: apt -y install wget
-      - run:
-          name: Git submodule upd
-          command: git submodule update --init
+          name: Initialize theme submodule
+          command: |
+            set -euo pipefail
+            sed -i 's|git@github.com:|https://github.com/|' .gitmodules
+            git submodule sync --recursive
+            git submodule update --init --recursive
       - run:
           name: Install Hugo
-          command: wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && tar xzf ./hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && rm ./hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
+          command: |
+            set -euo pipefail
+            version="<< pipeline.parameters.hugo-version >>"
+            archive="hugo_${version}_linux-amd64.tar.gz"
+            url="https://github.com/gohugoio/hugo/releases/download/v${version}/${archive}"
+            if ! curl -fsSL --retry 3 --retry-delay 2 -o "/tmp/${archive}" "${url}"; then
+              archive="hugo_${version}_Linux-64bit.tar.gz"
+              url="https://github.com/gohugoio/hugo/releases/download/v${version}/${archive}"
+              curl -fsSL --retry 3 --retry-delay 2 -o "/tmp/${archive}" "${url}"
+            fi
+            tar -xzf "/tmp/${archive}" -C /tmp hugo
+            mkdir -p "${HOME}/.local/bin"
+            mv /tmp/hugo "${HOME}/.local/bin/hugo"
+            echo 'export PATH="${HOME}/.local/bin:${PATH}"' >> "${BASH_ENV}"
+            "${HOME}/.local/bin/hugo" version
       - run:
-          name: Exec Hugo
-          command: ./hugo
-  gcp_deploy:
+          name: Build site
+          command: |
+            set -euo pipefail
+            hugo
+            test -s public/index.html
+  deploy_gae:
     steps:
       - run:
-          name: Decode Google Cloud Credentials
-          command: echo ${GOOGLE_AUTH} | base64 -d -i > ${HOME}/gcp-key.json
+          name: Authenticate to Google Cloud
+          command: |
+            set -euo pipefail
+            : "${GOOGLE_AUTH:?GOOGLE_AUTH is required}"
+            : "${GOOGLE_PROJECT_ID:?GOOGLE_PROJECT_ID is required}"
+            printf '%s' "${GOOGLE_AUTH}" | base64 --decode > "${HOME}/gcp-key.json"
+            chmod 600 "${HOME}/gcp-key.json"
+            gcloud auth activate-service-account --key-file "${HOME}/gcp-key.json"
+            gcloud config set project "${GOOGLE_PROJECT_ID}"
       - run:
-          name: exec gcloud setting
-          command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json && gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-      - run:
-          name: deploy to GAE
-          command: gcloud -q app deploy app.yaml
+          name: Deploy to App Engine
+          command: |
+            set -euo pipefail
+            trap 'rm -f "${HOME}/gcp-key.json"' EXIT
+            gcloud app deploy app.yaml --quiet --project="${GOOGLE_PROJECT_ID}"
+
 jobs:
   build:
-    executor: default
+    executor: build
     steps:
-      - checkout
-      - bundle_install
+      - build_site
       - persist_to_workspace:
           root: .
           paths:
-            - .
+            - public
+            - app.yaml
+            - .gcloudignore
   deploy:
-    executor: default
+    executor: deploy
     steps:
       - attach_workspace:
           at: .
-      - gcp_deploy
+      - deploy_gae
+
 workflows:
   build_and_deploy:
     jobs:
